@@ -3,6 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
+
+// line 7 to line 20 not compulsery to write code
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -10,8 +12,15 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "15kb" }));
+app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
+
+// Routes import
+
+import userRouter from "./routes/user.routes.js";
+//Router declaration
+app.use("/api/v1/users", userRouter);
+//http:localhost:3000/api/v1/users/register
 export { app };
